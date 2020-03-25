@@ -11,15 +11,7 @@ router.get("/", function(req, res) {
 });
 
 const User = require(`../controllers/userController`);
-/*
-const {
-  signup,
-  signin,
-  recoverPassword,
-  resetPassword,
-  handleValidation
-} = require('../middlewares/validators');
-*/
+
 const loginRequired = require('../middlewares/loginRequired');
 
 router.post('/signup', User.signUp);
@@ -28,9 +20,7 @@ router.post('/social', User.socialSignIn);
 
 
 router.route('/edit').patch(loginRequired, User.editUser);
-//router.route('/profile').get(loginRequired, User.getProfileSummary);
 
-//router.get('/:userId', loginRequired, User.fetchUser);
 router.post(
   '/reset-password',
   User.recoverPassword

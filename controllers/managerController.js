@@ -30,7 +30,7 @@ exports.new = (req, res) => {
       console.log(err.message);
     } else {
       res.json({
-        message: `New Word Added to DB`,
+        message: `New Word Added`,
         data: lexicon
       });
     }

@@ -18,9 +18,30 @@ with a body key "userInput" & a value of a single sentence.
 
 
 ## Project Requirements: 
+Route / users/signup user signup
+- input: {
+    "fullname":"xxxxxx",
+        "phone":"xxxxxx",
+        "email":"xxxxxx",
+        "password":"xxxxxx",
+        "username":"xxxxxx"
+}
+Route / users/signin user signup
+- input: {
+        "email":"xxxxxx",
+        "password":"xxxxxx"
+}
+All other Routes must have attributes
+Header
+Authorization: bearer {token}
+
 Route / complexity calculates complexity of a string
+
+- input: {
+    "userInput": "Kim loves going to the cinema"
+}
 - output: {"data": {
-    overall_ld: 0.42
+    overall_ld: 0.67
     }
     }
 
@@ -31,6 +52,23 @@ Route /complexity?mode=verbose returns multiple sentances and an overall lexical
         overall_ld: 0.42
     }
 }
+Route /add/lexicon/ Adds new words to Dictionary:
+-input:{
+    "text": "Bliss"
+}
+
+- output: {
+   {
+    "message": "New Word Added",
+    "data": {
+        "_id": "5e7b3dacc30ad1794ca354a0",
+        "date": "2020-03-25T11:17:00.392Z",
+        "text": "Bliss",
+        "__v": 0
+    }
+   }
+ }
+
 
 ERRORS: 100 words maximum or 1000 characters are valid inputs
 

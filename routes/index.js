@@ -2,11 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const loginRequired = require('../middlewares/loginRequired');
-/* GET home page. *//*
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-*/
+
 router.use('*', loginRequired);
 // Default
 router.get("/", function(req, res) {
