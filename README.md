@@ -55,6 +55,8 @@ Route /complexity?mode=verbose returns multiple sentances and an overall lexical
         overall_ld: 0.42
     }
 }
+
+
 Route /add/lexicon/ Adds new words to Dictionary:
 -input:{
     "text": "Bliss"
