@@ -58,6 +58,8 @@ Route /complexity?mode=verbose returns multiple sentances and an overall lexical
 
 
 Route /add/lexicon/ Adds new words to Dictionary:
+
+
 -input:{
     "text": "Bliss"
 }
