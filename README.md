@@ -26,13 +26,16 @@ Route / users/signup user signup
         "password":"xxxxxx",
         "username":"xxxxxx"
 }
+
 Route / users/signin user signup
 - input: {
         "email":"xxxxxx",
         "password":"xxxxxx"
 }
 All other Routes must have attributes
+
 Header
+
 Authorization: bearer {token}
 
 Route / complexity calculates complexity of a string
