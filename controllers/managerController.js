@@ -21,7 +21,7 @@ exports.index = function(req, res) {
 // Add Lexicon
 exports.new = (req, res) => {
   let lexicon = new Lexicon();
-  word.text = req.body.text;
+  lexicon.text = req.body.text;
 
   // save the word and handle errors
   lexicon.save(err => {
