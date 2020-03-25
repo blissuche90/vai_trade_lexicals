@@ -1,19 +1,29 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable import/prefer-default-export */
+/*
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import User from '../models/User';
 import config from '../config';
 import { sendMail, templates } from '../helpers/email';
+*/
 
-dotenv.config();
-const { JWT_SECRET } = config;
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+//dotenv = require('dotenv');
+const User  = require('../models/User');
+const config  = require('../config');
 
-const generateToken = (payload, duration = undefined) =>
+//dotenv.config();
+const  JWT_SECRET  = config.JWT_SECRET;
+
+
+const generateToken = (payload, duration = 3600) =>
   jwt.sign({ ...payload }, JWT_SECRET, { expiresIn: duration });
 
-export const signUp = async (req, res) => {
+
+ exports.signUp = async (req, res) => {
   try {
     const {
       body: {
@@ -24,6 +34,7 @@ export const signUp = async (req, res) => {
         username
       }
     } = req;
+   
     const userExists = await User.findOne({ email: email.toLowerCase() });
     if (userExists) {
       return res.status(400).json({
@@ -31,6 +42,7 @@ export const signUp = async (req, res) => {
         errors: ['This user already exists.']
       });
     }
+    console.log(JWT_SECRET);
     const user = await User.create({
       phone,
       email: email.toLowerCase(),
@@ -38,6 +50,7 @@ export const signUp = async (req, res) => {
       username,      
       password: bcrypt.hashSync(password, bcrypt.genSaltSync(10))
     });
+    //console.log(user._doc);
     delete user._doc.password;
     return res.status(201).json({
       success: true,
@@ -47,12 +60,12 @@ export const signUp = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       success: false,
-      errors: ['An error occured, please try again.']
+      errors: ['An error occured, please try again.'+error.message]
     });
   }
 };
 
-export const signIn = async (req, res) => {
+exports.signIn = async (req, res) => {
   try {
     const {
       body: { email, password }
@@ -78,7 +91,7 @@ export const signIn = async (req, res) => {
   }
 };
 
-export const socialSignIn = async (req, res) => {
+exports.socialSignIn = async (req, res) => {
   try {
     const {
       body: { email, name }
@@ -108,7 +121,7 @@ export const socialSignIn = async (req, res) => {
   }
 };
 
-export const fetchUser = async (req, res) => {
+exports.fetchUser = async (req, res) => {
   try {
     const { userId } = req.params;
     const foundUser = await User.findOne({ _id: userId });
@@ -133,7 +146,7 @@ export const fetchUser = async (req, res) => {
   }
 };
 
-export const editUser = async (req, res) => {
+exports.editUser = async (req, res) => {
   try {
     const {
       user: userExists,
@@ -190,7 +203,7 @@ export const editUser = async (req, res) => {
 };
 
 
-export const recoverPassword = async (req, res) => {
+exports.recoverPassword = async (req, res) => {
   const { email } = req.body;
   try {
     const user = await User.findOne({ email });
@@ -221,7 +234,7 @@ export const recoverPassword = async (req, res) => {
   }
 };
 
-export const resetPassword = async (req, res) => {
+exports.resetPassword = async (req, res) => {
   const {
     body: { password },
     params: { token }

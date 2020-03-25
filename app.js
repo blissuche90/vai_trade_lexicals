@@ -27,6 +27,7 @@ app.use(
 app.use(bodyParser.json());
 
 app.use("/api", indexRouter);
+app.use("/users", usersRouter);
 
 mongoose.connect(
   config.MONGODB_URI,

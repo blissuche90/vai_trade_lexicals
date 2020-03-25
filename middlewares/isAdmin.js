@@ -6,4 +6,5 @@ const isAdmin = (req, res, next) => {
   return res.status(403).json({ status: 'error', message: 'Not an admin' });
 };
 
-export default isAdmin;
+module.exports = isAdmin;
+

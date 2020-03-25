@@ -1,11 +1,11 @@
 /* eslint-disable no-underscore-dangle */
-import jwt from 'jsonwebtoken';
-import User from '../models/user';
-import config from '../config';
+var jwt = require('jsonwebtoken');
+var User  = require('../models/user');
+var config = require('../config');
 
-const { JWT_SECRET } = config;
+const  JWT_SECRET  = config.JWT_SECRET;
 
-export default (req, res, next) => {
+  const loginRequired = (req, res, next) => {
   const { authorization } = req.headers;
   const token =
     req.headers.token ||
@@ -33,3 +33,4 @@ export default (req, res, next) => {
     return next();
   });
 };
+module.exports = loginRequired;
