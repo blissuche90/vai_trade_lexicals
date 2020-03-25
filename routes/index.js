@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 // Default
 router.get("/", function(req, res) {
   res.json({
-    status: `Api is OK`,
+    status: `Api is Running`,
     message: `Welcome to Lexical Density Calculator`,
     instructions: `please submit a post request with key userInput`
   });
@@ -34,7 +34,7 @@ router
 const managerController = require(`../controllers/managerController`);
 
 
-// Word routes
+// Lexicon routes
 router
   .route("/add/lexicon")
   .get(managerController.index)
